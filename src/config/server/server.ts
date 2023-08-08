@@ -1,16 +1,22 @@
 import express from 'express';
 import { Express } from 'express';
 import cors from 'cors';
-import config from '../../../config/environment';
+import { config } from './../index';
+
 
 class Server {
 
     app: Express;
     port: number | string;
+    paths: Object;
 
     constructor() {
         this.app = express();
         this.port = config.port || 4009;
+
+        this.paths = {
+            // example: userPaths: '/users'
+        }
     }
 
 
@@ -21,7 +27,11 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }));
     }
 
-    routes() { }
+    routes() {
+
+        // example: this.app.use(this.paths.userPaths, userRouter);
+
+    }
 
     listen() {
         this.app.listen(this.port, () => {
